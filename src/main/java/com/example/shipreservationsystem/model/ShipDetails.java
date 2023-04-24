@@ -20,11 +20,11 @@ public class ShipDetails {
     private int capacity;
 
     @OneToMany(cascade = CascadeType.ALL, targetEntity = RouteDetails.class)
-    @JoinColumn(name = "route_FK", referencedColumnName = "sid")
+    @JoinColumn(name = "route_fk", referencedColumnName = "sid")
     private List<RouteDetails> route;
 
     @OneToMany(cascade = CascadeType.ALL, targetEntity = ShipSchedule.class)
-    @JoinColumn(name = "shcedule_fk", referencedColumnName = "sid")
+    @JoinColumn(name = "schedule_fk", referencedColumnName = "sid")
     private List<ShipSchedule> schedule;
 
 
