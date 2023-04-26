@@ -19,9 +19,6 @@ public class ShipDetails {
     private String model;
     private int capacity;
 
-    @OneToMany(cascade = CascadeType.ALL, targetEntity = RouteDetails.class)
-    @JoinColumn(name = "route_fk", referencedColumnName = "sid")
-    private List<RouteDetails> route;
 
     @OneToMany(cascade = CascadeType.ALL, targetEntity = ShipSchedule.class)
     @JoinColumn(name = "schedule_fk", referencedColumnName = "sid")
@@ -34,7 +31,6 @@ public class ShipDetails {
                 "sname='" + sname + '\'' +
                 ", model='" + model + '\'' +
                 ", capacity=" + capacity +
-                ", route=" + route +
                 ", schedule=" + schedule +
                 '}';
     }
@@ -43,7 +39,6 @@ public class ShipDetails {
         this.sname = sname;
         this.model = model;
         this.capacity = capacity;
-        this.route = route;
         this.schedule = schedule;
     }
 }

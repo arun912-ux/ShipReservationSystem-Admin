@@ -1,14 +1,11 @@
 package com.example.shipreservationsystem.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 
-@Getter @Setter @NoArgsConstructor
+import java.util.List;
+
+@Data @Getter @Setter @NoArgsConstructor
 @Entity
 @Table(name = "route-details")
 public class RouteDetails {
@@ -23,10 +20,15 @@ public class RouteDetails {
 
     private double distance;
 
-    public RouteDetails(String source, String destination, double distance) {
+    @OneToMany(cascade = CascadeType.ALL, targetEntity = ShipDetails.class)
+    @JoinColumn(name = "ships_fk", referencedColumnName = "rid")
+    private List<ShipDetails> ships;
+
+    public RouteDetails(String source, String destination, double distance, List<ShipDetails> ships) {
         this.source = source;
         this.destination = destination;
         this.distance = distance;
+        this.ships = ships;
     }
 
     @Override
@@ -35,6 +37,7 @@ public class RouteDetails {
                 "source='" + source + '\'' +
                 ", destination='" + destination + '\'' +
                 ", distance=" + distance +
+                ", ships=" + ships +
                 '}';
     }
 }
