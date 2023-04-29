@@ -2,17 +2,20 @@ package com.example.shipreservationsystem.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.Hibernate;
 
-import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
-@Data @Getter @Setter @NoArgsConstructor
+
+@Getter @Setter @NoArgsConstructor @ToString
 @Entity
 @Table(name = "route-details")
 public class RouteDetails {
 
     @Id
-    @GeneratedValue
-    private Long rid;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long route_id;
 
     private String source;
 
@@ -20,24 +23,43 @@ public class RouteDetails {
 
     private double distance;
 
-    @OneToMany(cascade = CascadeType.ALL, targetEntity = ShipDetails.class)
-    @JoinColumn(name = "ships_fk", referencedColumnName = "rid")
-    private List<ShipDetails> ships;
 
-    public RouteDetails(String source, String destination, double distance, List<ShipDetails> ships) {
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinTable(name = "routes_ships",
+            joinColumns = {@JoinColumn(name = "route_id")},
+            inverseJoinColumns = { @JoinColumn(name = "ship_id") }
+    )
+    @ToString.Exclude
+    private Set<ShipDetails> ships;
+
+
+
+
+    public RouteDetails(String source, String destination, double distance, Set<ShipDetails> ships) {
         this.source = source;
         this.destination = destination;
         this.distance = distance;
         this.ships = ships;
     }
 
+
+
+
+
+
+
+
+
     @Override
-    public String toString() {
-        return "RouteDetails{" +
-                "source='" + source + '\'' +
-                ", destination='" + destination + '\'' +
-                ", distance=" + distance +
-                ", ships=" + ships +
-                '}';
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        RouteDetails that = (RouteDetails) o;
+        return getRoute_id() != null && Objects.equals(getRoute_id(), that.getRoute_id());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }

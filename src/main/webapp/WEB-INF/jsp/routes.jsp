@@ -1,7 +1,9 @@
 <%@ page import="com.example.shipreservationsystem.model.RouteDetails" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%--<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>--%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 
 <!DOCTYPE html>
 <html>
@@ -26,6 +28,12 @@
             }
 
         %>
+
+        <form:form method="get">
+
+
+
+        </form:form>
 
 <%--        <c:out value="Test from c:out"></c:out>--%>
 

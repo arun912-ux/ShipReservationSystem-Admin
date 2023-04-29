@@ -1,5 +1,6 @@
 package com.example.shipreservationsystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,7 +9,7 @@ import lombok.ToString;
 
 import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 @Getter @Setter @NoArgsConstructor @ToString
 @Entity
@@ -17,16 +18,28 @@ public class ShipSchedule {
 
     @Id
     @GeneratedValue
-    private Long sid;
+    private Long sch_id;
     private LocalDateTime journeyDate;
 
     private Integer seatAvailability;
 
-    @OneToMany(cascade = CascadeType.ALL, targetEntity = PassengerProfile.class)
-    @JoinColumn(name = "passenger_fk", referencedColumnName = "sid")
-    private List<PassengerProfile> passengers;
+    @ManyToMany(mappedBy = "schedules")
+    @JsonIgnore
+    @ToString.Exclude
+    private Set<ShipDetails> ships;
 
-    public ShipSchedule(LocalDateTime journeyDate, Integer seatAvailability, List<PassengerProfile> passengers) {
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinTable(name = "schedules_passengers",
+            joinColumns = {@JoinColumn(name = "schedule_id")},
+            inverseJoinColumns = { @JoinColumn(name = "passenger_id") }
+    )
+    @ToString.Exclude
+    private Set<PassengerProfile> passengers;
+
+
+
+    public ShipSchedule(LocalDateTime journeyDate, Integer seatAvailability, Set<PassengerProfile> passengers) {
         this.journeyDate = journeyDate;
         this.seatAvailability = seatAvailability;
         this.passengers = passengers;
