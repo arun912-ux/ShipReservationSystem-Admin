@@ -17,4 +17,8 @@ public class PassengerService {
     public List<PassengerProfile> getAllPassengers() {
         return passengerRepo.findAll();
     }
+    public Object getPassengerFromId(Long id){
+//                passengerRepo.findPassengerDetailsById(id);
+        return null;
+    }
 }

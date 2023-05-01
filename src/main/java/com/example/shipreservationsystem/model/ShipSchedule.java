@@ -29,7 +29,7 @@ public class ShipSchedule {
     private Set<ShipDetails> ships;
 
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(name = "schedules_passengers",
             joinColumns = {@JoinColumn(name = "schedule_id")},
             inverseJoinColumns = { @JoinColumn(name = "passenger_id") }

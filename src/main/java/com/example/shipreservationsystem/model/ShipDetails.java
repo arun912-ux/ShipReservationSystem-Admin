@@ -27,7 +27,7 @@ public class ShipDetails {
 
 
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(name = "schedules_ships",
             joinColumns = {@JoinColumn(name = "ship_id")},
             inverseJoinColumns = { @JoinColumn(name = "schedule_id") }

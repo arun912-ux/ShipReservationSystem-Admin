@@ -28,4 +28,26 @@ public class RouteDetailsService {
 //        List list = routesRepo.findScheduleForGivenSourceDestinationAndDateTime(src, dest);
         return null;
     }
+
+    public RouteDetails insertNewRouteDetails(RouteDetails routeDetails) {
+        return routesRepo.save(routeDetails);
+    }
+
+    public RouteDetails updateNewRouteDetails(RouteDetails routeDetails, Long id) {
+        RouteDetails oldRouteDetails = routesRepo.findById(id).orElseThrow(() -> new RuntimeException("Route Not Found Exception"));
+        oldRouteDetails.setDistance(routeDetails.getDistance());
+        oldRouteDetails.setSource(routeDetails.getSource());
+        oldRouteDetails.setDestination(routeDetails.getDestination());
+        return routesRepo.save(oldRouteDetails);
+    }
+
+    public RouteDetails deleteRouteDetails(Long id) {
+        RouteDetails deleted = routesRepo.findById(id).orElseThrow();
+        routesRepo.deleteById(id);
+        return deleted;
+    }
+
+    public RouteDetails getRouteDetailsById(Long id) {
+        return routesRepo.findById(id).orElseThrow();
+    }
 }

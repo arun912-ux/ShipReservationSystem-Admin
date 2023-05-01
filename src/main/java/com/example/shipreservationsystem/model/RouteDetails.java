@@ -1,5 +1,6 @@
 package com.example.shipreservationsystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -24,13 +25,15 @@ public class RouteDetails {
     private double distance;
 
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(name = "routes_ships",
             joinColumns = {@JoinColumn(name = "route_id")},
             inverseJoinColumns = { @JoinColumn(name = "ship_id") }
     )
     @ToString.Exclude
+    @JsonIgnore
     private Set<ShipDetails> ships;
+
 
 
 
@@ -41,6 +44,7 @@ public class RouteDetails {
         this.distance = distance;
         this.ships = ships;
     }
+
 
 
 
