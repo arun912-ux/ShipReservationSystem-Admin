@@ -98,7 +98,7 @@ public class RouteDetailsService {
         ShipDetails shipDetails = shipsRepo.findById(sId).orElseThrow();
 
         // 1st check whether the given ship is present in routes
-        boolean flag = false;
+//        boolean flag = false;
         Set<ShipDetails> ships = routeDetails.getShips();
 //        if(! ships.isEmpty()){
 //            for(ShipDetails sd : ships){
@@ -119,5 +119,9 @@ public class RouteDetailsService {
         }
 
         return routeDetails;
+    }
+
+    public List<Object> getRoutesForSrcAndDist(String source, String destination) {
+        return routesRepo.findAllBySourceAndDestinationAndTime(source, destination);
     }
 }

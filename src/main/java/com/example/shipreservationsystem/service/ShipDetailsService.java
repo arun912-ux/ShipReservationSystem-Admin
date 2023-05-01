@@ -1,6 +1,5 @@
 package com.example.shipreservationsystem.service;
 
-import com.example.shipreservationsystem.model.RouteDetails;
 import com.example.shipreservationsystem.model.ShipDetails;
 import com.example.shipreservationsystem.model.ShipSchedule;
 import com.example.shipreservationsystem.repos.SchedulesRepo;

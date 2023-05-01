@@ -60,16 +60,17 @@ public class RouteDetailsController {
     @PostMapping(value = "/details/request")
     public ResponseEntity<ResponseRO> getRouteDetails(@RequestBody Map<?, ?> data){
 
-//      System.out.println("inside getRouteDetails : " + (data.get("datetime").toString()) + " " + data.get("destination") + " " + data.get("source"));
-
-      return ResponseEntity.ok(ResponseRO.builder()
+        List<Object> returnData = routeDetailsService.getRoutesForSrcAndDist((String)data.get("source"), (String)data.get("destination"));
+        System.out.println("inside getRouteDetails : " + (data.get("datetime").toString()) + " " + data.get("destination") + " " + data.get("source"));
+        System.out.println("returned Data from custom query : " + returnData);
+        return ResponseEntity.ok(ResponseRO.builder()
               .timeStamp(LocalDateTime.now())
               .message("Successful")
               .httpStatus(HttpStatus.OK)
               .statusCode(200)
-              .data(Map.of("Data", data))
+              .data(Map.of("Data", returnData))
               .build()
-      );
+        );
     }
 
 
