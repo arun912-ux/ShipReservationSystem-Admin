@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -121,7 +122,7 @@ public class RouteDetailsService {
         return routeDetails;
     }
 
-    public List<Object> getRoutesForSrcAndDist(String source, String destination) {
-        return routesRepo.findAllBySourceAndDestinationAndTime(source, destination);
+    public List<Object> getRoutesForSrcAndDist(String source, String destination, LocalDateTime datetime) {
+        return routesRepo.findAllBySourceAndDestinationAndTime(source, destination, datetime);
     }
 }

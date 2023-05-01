@@ -10,8 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Map;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 
 
@@ -60,9 +60,11 @@ public class RouteDetailsController {
     @PostMapping(value = "/details/request")
     public ResponseEntity<ResponseRO> getRouteDetails(@RequestBody Map<?, ?> data){
 
-        List<Object> returnData = routeDetailsService.getRoutesForSrcAndDist((String)data.get("source"), (String)data.get("destination"));
-        System.out.println("inside getRouteDetails : " + (data.get("datetime").toString()) + " " + data.get("destination") + " " + data.get("source"));
-        System.out.println("returned Data from custom query : " + returnData);
+        LocalDateTime dateTime = LocalDateTime.parse(data.get("datetime").toString(), DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        List<Object> returnData = routeDetailsService.getRoutesForSrcAndDist((String)data.get("source"), (String)data.get("destination"), dateTime);
+//        System.out.println("inside getRouteDetails : " + (data.get("datetime").toString()) + " " + data.get("destination") + " " + data.get("source"));
+//        System.out.println("returned Data from custom query : " + returnData.toString());
+
         return ResponseEntity.ok(ResponseRO.builder()
               .timeStamp(LocalDateTime.now())
               .message("Successful")

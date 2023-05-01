@@ -38,4 +38,14 @@ public class ScheduleService {
         schedulesRepo.delete(schedule);
         return schedule;
     }
+
+
+//    TODO
+    public ShipSchedule addPassengerToSchedule(Long schId, Long pasId) {
+        return null;
+    }
+
+    public ShipSchedule removePassengerFromSchedule(Long schId, Long pasId) {
+        return null;
+    }
 }

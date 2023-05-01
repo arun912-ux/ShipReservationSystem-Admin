@@ -102,4 +102,51 @@ public class ScheduleController {
 
     }
 
+
+
+
+
+
+
+
+
+
+
+
+    // assign passengers to schedule
+    @PostMapping("/details/{sch_id}/passenger/{pas_id}")
+    public ResponseEntity<ResponseRO> assignShipToRoute(@PathVariable Long sch_id, @PathVariable Long pas_id){
+        ShipSchedule schedule = scheduleService.addPassengerToSchedule(sch_id, pas_id);
+        return ResponseEntity.ok(ResponseRO.builder()
+                .message("passenger added to schedule")
+                .data(Map.of("schedule-details", schedule))
+                .timeStamp(LocalDateTime.now())
+                .httpStatus(HttpStatus.ACCEPTED)
+                .statusCode(202)
+                .build()
+        );
+    }
+
+
+    // delete passenger association from schedule
+    @DeleteMapping("/details/{sch_id}/passenger/{pas_id}")
+    public ResponseEntity<ResponseRO> removePassengerFromSchedule(@PathVariable Long sch_id, @PathVariable Long pas_id){
+        ShipSchedule schedule = scheduleService.removePassengerFromSchedule(sch_id, pas_id);
+        return ResponseEntity.ok(ResponseRO.builder()
+                .message("removed passenger from schedule")
+                .statusCode(202)
+                .httpStatus(HttpStatus.ACCEPTED)
+                .timeStamp(LocalDateTime.now())
+                .data(Map.of("deleted-passenger-from-schedule", schedule))
+                .build()
+        );
+
+    }
+
+
+
+
+
+
+
 }
