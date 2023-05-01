@@ -10,9 +10,5 @@ import org.springframework.stereotype.Repository;
 @EnableJpaRepositories
 public interface PassengerRepo extends JpaRepository<PassengerProfile, Long> {
 
-//    @Query(
-//            "select pp from RouteDetails rd join ShipDetails sd on rd.route_id  join ShipSchedule ss on sd.sd_id join PassengerProfile pp where pp.pas_id=:id"
-//    )
-//    Object findPassengerDetailsById(Long id);
 
 }

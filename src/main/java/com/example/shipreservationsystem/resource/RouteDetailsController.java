@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -45,7 +44,7 @@ public class RouteDetailsController {
     public ResponseEntity<ResponseRO> getRouteDetailsById(@PathVariable Long id){
         RouteDetails retrievedRoute = routeDetailsService.getRouteDetailsById(id);
         return ResponseEntity.ok(ResponseRO.builder()
-                .message(String.valueOf("route " + id + " details"))
+                .message("route " + id + " details")
                 .data(Map.of("route " + id , retrievedRoute))
                 .timeStamp(LocalDateTime.now())
                 .httpStatus(HttpStatus.OK)

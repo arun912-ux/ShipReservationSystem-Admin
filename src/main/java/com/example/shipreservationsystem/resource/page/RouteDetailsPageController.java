@@ -7,19 +7,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/routes")
-public class RouteDetailsController {
+public class RouteDetailsPageController {
 
 
     private final RouteDetailsService routeDetailsService;
+    private Object RequestMethod;
 
 
-    @RequestMapping(value = "/details-page", method = RequestMethod.GET)
+    @GetMapping(value = "/details-page")
     public String viewAllRoutes(Model model){
         model.addAttribute("routes", routeDetailsService.getAllRouteDetails());
         return "routes";
