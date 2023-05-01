@@ -1,6 +1,7 @@
 package com.example.shipreservationsystem.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -10,6 +11,7 @@ import java.util.Set;
 
 
 @Getter @Setter @NoArgsConstructor @ToString
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
 @Table(name = "route-details")
 public class RouteDetails {
@@ -31,7 +33,6 @@ public class RouteDetails {
             inverseJoinColumns = { @JoinColumn(name = "ship_id") }
     )
     @ToString.Exclude
-    @JsonIgnore
     private Set<ShipDetails> ships;
 
 

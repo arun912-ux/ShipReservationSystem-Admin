@@ -93,7 +93,7 @@ public class RouteDetailsController {
     // update a route details with route_id
     @PutMapping("/details/update/{id}")
     public ResponseEntity<ResponseRO> updateRouteDetails(@RequestBody RouteDetails routeDetails, @PathVariable Long id){
-        RouteDetails updated = routeDetailsService.updateNewRouteDetails(routeDetails, id);
+        RouteDetails updated = routeDetailsService.updateRouteDetails(routeDetails, id);
         return ResponseEntity.ok(ResponseRO.builder()
                 .message("route updated")
                 .data(Map.of("route-details", updated))
@@ -121,6 +121,48 @@ public class RouteDetailsController {
     }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // assign ship to route
+    @PostMapping("/details/{r_id}/ship/{s_id}")
+    public ResponseEntity<ResponseRO> assignShipToRoute(@PathVariable Long r_id, @PathVariable Long s_id){
+        RouteDetails routeDetails = routeDetailsService.addShipToRoute(r_id, s_id);
+        return ResponseEntity.ok(ResponseRO.builder()
+                .message("ship added to route")
+                .data(Map.of("route-details", routeDetails))
+                .timeStamp(LocalDateTime.now())
+                .httpStatus(HttpStatus.ACCEPTED)
+                .statusCode(202)
+                .build()
+        );
+    }
+
+
+    // delete ship association from a route
+    @DeleteMapping("/details/{r_id}/ship/{s_id}")
+    public ResponseEntity<ResponseRO> removeShipAssignFromRoute(@PathVariable Long r_id, @PathVariable Long s_id){
+        RouteDetails routeDetails = routeDetailsService.removeShipFromRoute(r_id, s_id);
+        return ResponseEntity.ok(ResponseRO.builder()
+                .message("removed ship from route")
+                .statusCode(202)
+                .httpStatus(HttpStatus.ACCEPTED)
+                .timeStamp(LocalDateTime.now())
+                .data(Map.of("deleted-ship-from-route", routeDetails))
+                .build()
+        );
+
+    }
 
 
 }

@@ -1,13 +1,10 @@
 package com.example.shipreservationsystem.resource;
 
-import com.example.shipreservationsystem.model.RouteDetails;
 import com.example.shipreservationsystem.model.ShipDetails;
-import com.example.shipreservationsystem.model.ShipDetailsDTO;
 import com.example.shipreservationsystem.ro.ResponseRO;
 import com.example.shipreservationsystem.service.ShipDetailsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -103,5 +100,47 @@ public class ShipController {
         );
 
     }
+
+
+
+
+
+
+
+
+    // assign schedule to the ships
+    @PostMapping("/details/{sd_id}/schedule/{sc_id}")
+    public ResponseEntity<ResponseRO> assignScheduleToShips(@PathVariable Long sd_id, @PathVariable Long sc_id){
+
+        ShipDetails shipDetails = shipDetailsService.addScheduleToShipByIds(sd_id, sc_id);
+
+        return ResponseEntity.ok(ResponseRO.builder()
+                .message("Schedule added to Ship")
+                .httpStatus(HttpStatus.ACCEPTED)
+                .statusCode(HttpStatus.ACCEPTED.value())
+                .data(Map.of("ship-schedule-details", shipDetails))
+                .timeStamp(LocalDateTime.now())
+                .build()
+        );
+    }
+
+
+
+    @DeleteMapping("/details/{sd_id}/schedule/{sc_id}")
+    public ResponseEntity<ResponseRO> removeScheduleAssociationFromShips(@PathVariable Long sd_id, @PathVariable Long sc_id){
+
+        ShipDetails shipDetails = shipDetailsService.removeScheduleFromShip(sd_id, sc_id);
+
+        return ResponseEntity.ok(ResponseRO.builder()
+                .message("Schedule removed from Ship")
+                .httpStatus(HttpStatus.ACCEPTED)
+                .statusCode(HttpStatus.ACCEPTED.value())
+                .data(Map.of("ship-schedule-details", shipDetails))
+                .timeStamp(LocalDateTime.now())
+                .build()
+        );
+    }
+
+
 
 }
