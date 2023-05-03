@@ -18,18 +18,18 @@
 
         <h1>Hello World from JSP</h1>
         <%
-            out.print("routes.jsp : Hello from servlet section </br>");
+            out.print("routes.jsp : Hello from servlet section "); out.print("</br>");
 
             List<RouteDetails> routes = (List<RouteDetails>) request.getAttribute("routes");
 
             for (RouteDetails route : routes) {
-                    out.println(route);
+                    out.print(route.getRoute_id()); out.print(" | "); out.print(route.getSource()); out.print(" | "); out.print(route.getDestination()); out.print(" | "); out.print(route.getDistance());
                     out.println("</br>");
             }
 
         %>
 
-        <form:form method="get">
+        <form:form method="get" action="/">
 
 
 

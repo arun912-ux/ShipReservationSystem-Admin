@@ -4,6 +4,7 @@ import com.example.shipreservationsystem.model.RouteDetails;
 import com.example.shipreservationsystem.model.ShipDetails;
 import com.example.shipreservationsystem.repos.RouteDetailsRepo;
 import com.example.shipreservationsystem.repos.ShipDetailsRepo;
+import com.example.shipreservationsystem.ro.RouteTablesRO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -123,6 +124,7 @@ public class RouteDetailsService {
     }
 
     public List<Object> getRoutesForSrcAndDist(String source, String destination, LocalDateTime datetime) {
-        return routesRepo.findAllBySourceAndDestinationAndTime(source, destination, datetime);
+        List<Object> all = routesRepo.findAllBySourceAndDestinationAndTime(source, destination, datetime);
+        return all;
     }
 }

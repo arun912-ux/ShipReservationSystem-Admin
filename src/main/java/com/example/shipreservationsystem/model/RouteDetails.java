@@ -50,12 +50,15 @@ public class RouteDetails {
 
 
 
-
-
-
-
-
-
+    public String customToString() {
+        return "{" +
+                "\"route_id\": '" + route_id + "'," +
+                "\"source\": '" + source + "'," +
+                "\"destination\": '" + destination + "'," +
+                "\"distance\": '" + distance + "'," +
+                "\"ships\": '" + ships + "'" +
+                "}";
+    }
 
     @Override
     public boolean equals(Object o) {

@@ -2,6 +2,7 @@ package com.example.shipreservationsystem.resource;
 
 import com.example.shipreservationsystem.model.RouteDetails;
 import com.example.shipreservationsystem.ro.ResponseRO;
+import com.example.shipreservationsystem.ro.RouteTablesRO;
 import com.example.shipreservationsystem.service.RouteDetailsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -58,12 +59,16 @@ public class RouteDetailsController {
 
     // get routes details for a specific source and destination and datetime
     @PostMapping(value = "/details/request")
-    public ResponseEntity<ResponseRO> getRouteDetails(@RequestBody Map<?, ?> data){
+    public ResponseEntity<ResponseRO> getRouteDetails(@RequestParam Optional<String> source,
+                                                      @RequestParam Optional<LocalDateTime> datetime,
+                                                      @RequestParam Optional<String> destination){
 
-        LocalDateTime dateTime = LocalDateTime.parse(data.get("datetime").toString(), DateTimeFormatter.ISO_LOCAL_DATE_TIME);
-        List<Object> returnData = routeDetailsService.getRoutesForSrcAndDist((String)data.get("source"), (String)data.get("destination"), dateTime);
+//        LocalDateTime dateTime = LocalDateTime.parse(data.get("datetime").toString(), DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        List<Object> returnData =
+                routeDetailsService.getRoutesForSrcAndDist(source.orElse(""), destination.orElse(""), datetime.orElse(LocalDateTime.now()));
+
 //        System.out.println("inside getRouteDetails : " + (data.get("datetime").toString()) + " " + data.get("destination") + " " + data.get("source"));
-//        System.out.println("returned Data from custom query : " + returnData.toString());
+        System.out.println("returned Data from custom query : " + returnData.toString());
 
         return ResponseEntity.ok(ResponseRO.builder()
               .timeStamp(LocalDateTime.now())
