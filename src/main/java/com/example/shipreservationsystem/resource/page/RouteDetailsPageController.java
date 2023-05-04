@@ -2,6 +2,8 @@ package com.example.shipreservationsystem.resource.page;
 
 
 import com.example.shipreservationsystem.model.RouteDetails;
+import com.example.shipreservationsystem.model.ShipDetails;
+import com.example.shipreservationsystem.repos.RouteDetailsRepo;
 import com.example.shipreservationsystem.ro.IndexRO;
 import com.example.shipreservationsystem.ro.ResponseRO;
 import com.example.shipreservationsystem.ro.RouteTablesRO;
@@ -20,6 +22,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 @Controller
 @RequiredArgsConstructor
@@ -28,8 +31,9 @@ public class RouteDetailsPageController {
 
 
     private final RouteDetailsService routeDetailsService;
+    private final RouteDetailsRepo routeDetailsRepo;
 
-    @GetMapping("/")
+    @GetMapping({"/", ""})
     public String homePage(Model model, @ModelAttribute("indexRo") IndexRO indexRo, BindingResult bindingResult){
 //        System.out.println(indexRo);
         return "index";
@@ -37,7 +41,7 @@ public class RouteDetailsPageController {
 
     // get all routes details from db
 
-    @GetMapping(value = "/details")
+    @GetMapping(value = {"/details", "/details/"})
     public String viewAllRoutes(Model model){
         model.addAttribute("routes", routeDetailsService.getAllRouteDetails());
         return "route-tables";
@@ -80,8 +84,8 @@ public class RouteDetailsPageController {
 
     // add a new route to table
     @GetMapping("/details/new")
-    public String newRouteDetails(Model model){
-//        System.out.println(routeDetails);
+    public String newRouteDetailsPage(){
+        System.out.println("newRouteDetailsPage");
 //        RouteDetails saved = routeDetailsService.insertNewRouteDetails(routeDetails);
 //        System.out.println(saved);
         return "new-route";
@@ -89,6 +93,14 @@ public class RouteDetailsPageController {
 
 
 
+    // add a new route to table
+    @PostMapping("/details/new")
+    public String newRouteDetails(@ModelAttribute("route") RouteDetails route, BindingResult result, Model model){
+        System.out.println(route);
+//        RouteDetails saved = routeDetailsService.insertNewRouteDetails(route);
+//        System.out.println(saved);
+        return "redirect:/page/routes/details";
+    }
 
 
 
@@ -103,18 +115,20 @@ public class RouteDetailsPageController {
 
 
     // update a route details with route_id
-    @PutMapping("/details/update/{id}")
+    @RequestMapping(value = "/details/update/{id}", method = {RequestMethod.PUT, RequestMethod.POST})
     public String updateRouteDetails(Model model, @ModelAttribute("route") RouteDetails routeDetails, @PathVariable Long id){
         RouteDetails updated = routeDetailsService.updateRouteDetails(routeDetails, id);
         model.addAttribute("id", id);
-        return "edit-route";
+        return "redirect:/page/routes/details";
     }
 
 
     // when edit button is clicked, send the corresponding route details to edit page for editing and then
     // WE CAN CLICK THE UPDATE BUTTON IN EDIT PAGE and send that to above method for update.
-    @PostMapping(value = "/details/update/", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
-    public String showUpdatePage(Model model, @RequestBody RouteDetails route){
+    @GetMapping(value = "/details/update/{id}")
+    public String showUpdatePage(@PathVariable Long id, Model model){
+        RouteDetails route = routeDetailsRepo.findById(id).orElseThrow(() -> new RuntimeException("Route ID not found"));
+//        System.out.println("route update : " + route);
         model.addAttribute("route", route);
         return "edit-route";
     }
@@ -124,9 +138,34 @@ public class RouteDetailsPageController {
     @DeleteMapping("/details/delete/{id}")
     public String deleteRouteDetails(@PathVariable Long id){
         RouteDetails deletedRouteDetails = routeDetailsService.deleteRouteDetails(id);
-        return "redirect:/route-tables";
+        return "route-tables";
 
     }
+
+
+
+
+
+
+
+    // show the ships for the selected routes in new page.
+
+    @RequestMapping(value = "/details/ships/{id}", method = {RequestMethod.GET})
+    public String showAllCorrespondingShips(@PathVariable Long id, Model model){
+        RouteDetails route = routeDetailsRepo.findById(id).get();
+        Set<ShipDetails> ships = route.getShips();
+        model.addAttribute("route", route);
+        model.addAttribute("ships", ships);
+        return "route-ships";
+    }
+
+
+
+
+
+
+
+
 
 
 
