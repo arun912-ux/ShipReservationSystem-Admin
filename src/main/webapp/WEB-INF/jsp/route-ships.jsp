@@ -52,8 +52,9 @@
             Set<ShipSchedule> schedules = ship.getSchedules();
 //            System.out.println(schedules);
 
-            String edit =   "<form style=\"display: inline\" action=\"/page/routes/details/update/"+route.getRoute_id()+"\"><input type=\"submit\" value=\"Edit\" /></form>";
-            String delete = "<input type=\"submit\" value=\"Delete\" onclick=\"onDelete(" + route.getRoute_id() + ")\"/>";
+            String edit =   "<form style=\"display: inline\" action=\"/page/ships/details/update/"+route.getRoute_id()+"\"><input type=\"submit\" value=\"Edit\" /></form>";
+            // remove route-ship association
+            String delete = "<input type=\"submit\" value=\"Delete\" onclick=\"onDeleteShip(" + route.getRoute_id() + ',' + ship.getSd_id() + ")\"/>";
             String open = "<input type=\"submit\" value=\"Open\" onclick=\"changeScheduleDisplay()\">";
 //            out.print("<tr>");
 //            out.print("<td>"); out.print(ship.getSd_id()); out.print("</td>");
@@ -74,7 +75,7 @@
             for (ShipSchedule schedule : schedules) {
 
                     String EDIT = "<form style=\"display: inline\" action=\"/page/schedules/details/update/"+schedule.getSch_id()+"\"><input type=\"submit\" value=\"Edit\" /></form>";
-                    String DELETE = "<input type=\"submit\" value=\"Delete\" onclick=\"onDelete(" + schedule.getSch_id() + ")\"/>";
+                    String DELETE = "<input type=\"submit\" value=\"Delete\" onclick=\"onDeleteSchedule(" + schedule.getSch_id() + ")\"/>";
                     out.print("<div>");
                     out.print("<strong>Schedule ID :</strong>" + schedule.getSch_id()); out.print("<br>");
                     out.print("<strong>DateTime : </strong>" + schedule.getJourneyDate()); out.print("<br>");
@@ -84,6 +85,9 @@
                     out.print("</div>");
 
             }
+
+            String newSchedule =   "<form style=\"display: inline\" action=\"/page/schedules/details/new/" + ship.getSd_id() + "\"><input type=\"submit\" value=\"New\" /></form>";
+            out.print("<td>"); out.print(newSchedule); out.print("</td>");
             out.print("</td>");
             out.print("</tr>");
 
@@ -118,7 +122,7 @@
         }
 
 
-        function onDelete(id) {
+        function onDeleteSchedule(id) {
             console.log(id)
             // let b = confirm("Do you really want to delete");
             link = "${pageContext.request.contextPath}/schedules/details/delete/"+id;
@@ -136,6 +140,20 @@
             setTimeout(function() {
                 location.reload();
             }, 100);
+        }
+
+
+        function onDeleteShip(rid, sid){
+            console.log(rid, sid);
+            let link = "${pageContext.request.contextPath}/routes/details/" + rid + "/ship/" + sid;
+            console.log(link);
+
+            fetch(link, {
+                method : "DELETE"
+            })
+                .then((resp) => resp.json())
+                .then((json) => console.log(json))
+                .catch((error) => console.log(error));
         }
 
 

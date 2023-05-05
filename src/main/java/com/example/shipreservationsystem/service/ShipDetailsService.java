@@ -56,15 +56,16 @@ public class ShipDetailsService {
         // check whether the schedule id is mapped to any other ships
         Set<ShipDetails> ships = schedule.getShips();
         boolean flag = true;
-        if(! ships.isEmpty()){
-            ships.forEach(System.out::println);
-            for(ShipDetails sd : ships){
-                if(sd.getSd_id() != sdId){
-                    flag=false;
-                    break;
+        if(ships != null)
+            if(! ships.isEmpty()){
+                ships.forEach(System.out::println);
+                for(ShipDetails sd : ships){
+                    if(sd.getSd_id() != sdId){
+                        flag=false;
+                        break;
+                    }
                 }
             }
-        }
 
         if(flag) {
             shipDetails.getSchedules().add(schedule);
