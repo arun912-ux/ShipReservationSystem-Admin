@@ -11,7 +11,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Route-Ships</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 </head>
@@ -73,11 +73,14 @@
             out.print("<td style=\"display:flex; justify-content:space-around\">");
             for (ShipSchedule schedule : schedules) {
 
+                    String EDIT = "<form style=\"display: inline\" action=\"/page/schedules/details/update/"+schedule.getSch_id()+"\"><input type=\"submit\" value=\"Edit\" /></form>";
+                    String DELETE = "<input type=\"submit\" value=\"Delete\" onclick=\"onDelete(" + schedule.getSch_id() + ")\"/>";
                     out.print("<div>");
-                    out.print(schedule.getSch_id()); out.print("<br>");
-                    out.print(schedule.getJourneyDate()); out.print("<br>");
-                    out.print(schedule.getSeatAvailability() + "/" + ship.getCapacity()); out.print("<br>");
-                    out.print("EDIT    "); out.print("   DELETE");
+                    out.print("<strong>Schedule ID :</strong>" + schedule.getSch_id()); out.print("<br>");
+                    out.print("<strong>DateTime : </strong>" + schedule.getJourneyDate()); out.print("<br>");
+                    out.print("<strong>Seats :</strong> " + schedule.getSeatAvailability() + "/" + ship.getCapacity()); out.print("<br>");
+
+                    out.print(EDIT); out.print(DELETE);
                     out.print("</div>");
 
             }
@@ -113,5 +116,28 @@
                 scheduleRow.style.display="none";
             }
         }
+
+
+        function onDelete(id) {
+            console.log(id)
+            // let b = confirm("Do you really want to delete");
+            link = "${pageContext.request.contextPath}/schedules/details/delete/"+id;
+            console.log(link)
+            // if(b){
+            //     console.log("boolean : " , b)
+            // }
+            fetch(link, {
+                method : "DELETE"
+            })
+                .then((resp) => resp.json())
+                .then((json) => console.log(json))
+                .catch((error) => console.log(error));
+
+            setTimeout(function() {
+                location.reload();
+            }, 100);
+        }
+
+
     </script>
 </body>

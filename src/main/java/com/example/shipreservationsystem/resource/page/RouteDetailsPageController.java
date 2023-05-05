@@ -68,9 +68,9 @@ public class RouteDetailsPageController {
                 routeDetailsService.getRoutesForSrcAndDist(indexRo.getSource().orElse(""),
                                     indexRo.getDestination().orElse(""),
                                     indexRo.getDatetime().orElse(LocalDateTime.now()));
-        model.addAttribute("returnData", routes);
+        model.addAttribute("routes", routes);
         System.out.println("returned Data from custom query : " + routes);
-        return "route-tables";
+        return "search-result";
 
     }
 
@@ -84,10 +84,9 @@ public class RouteDetailsPageController {
 
     // add a new route to table
     @GetMapping("/details/new")
-    public String newRouteDetailsPage(){
+    public String newRouteDetailsPage(Model model, @ModelAttribute("route") RouteDetails route, BindingResult bindingResult){
         System.out.println("newRouteDetailsPage");
-//        RouteDetails saved = routeDetailsService.insertNewRouteDetails(routeDetails);
-//        System.out.println(saved);
+        model.addAttribute("route", new RouteDetails());
         return "new-route";
     }
 
@@ -97,8 +96,8 @@ public class RouteDetailsPageController {
     @PostMapping("/details/new")
     public String newRouteDetails(@ModelAttribute("route") RouteDetails route, BindingResult result, Model model){
         System.out.println(route);
-//        RouteDetails saved = routeDetailsService.insertNewRouteDetails(route);
-//        System.out.println(saved);
+        RouteDetails saved = routeDetailsService.insertNewRouteDetails(route);
+        System.out.println(saved);
         return "redirect:/page/routes/details";
     }
 
@@ -139,7 +138,6 @@ public class RouteDetailsPageController {
     public String deleteRouteDetails(@PathVariable Long id){
         RouteDetails deletedRouteDetails = routeDetailsService.deleteRouteDetails(id);
         return "route-tables";
-
     }
 
 

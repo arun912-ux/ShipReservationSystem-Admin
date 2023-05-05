@@ -3,8 +3,10 @@ package com.example.shipreservationsystem.service;
 import com.example.shipreservationsystem.model.ShipSchedule;
 import com.example.shipreservationsystem.repos.SchedulesRepo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.sql.PreparedStatement;
 import java.util.List;
 
 @Service
@@ -35,7 +37,14 @@ public class ScheduleService {
 
     public ShipSchedule deleteSchedule(Long id) {
         ShipSchedule schedule = schedulesRepo.findById(id).orElseThrow(() -> new RuntimeException("Schedule for given id not found"));
-        schedulesRepo.delete(schedule);
+//        try {
+//            schedulesRepo.delete(schedule);
+//        } catch (RuntimeException e){
+//            System.out.println(e.getMessage());
+            schedulesRepo.deleteForAssignedShipSchedule(id);
+
+//        }
+
         return schedule;
     }
 
