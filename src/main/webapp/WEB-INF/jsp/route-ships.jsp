@@ -66,10 +66,10 @@
                 out.print("<td>"); out.print(ship.getSd_id()); out.print("</td>");
                 out.print("<td>"); out.print(ship.getSname()); out.print("</td>");
                 out.print("<td>"); out.print(ship.getModel()); out.print("</td>");
-                out.print("<td>"); out.print(edit); out.print("  "); out.print(open); out.print("  "); out.print(delete); out.print("</td>");
+                out.print("<td>"); out.print("edit"); out.print("  "); out.print(open); out.print("  "); out.print(delete); out.print("</td>");
             out.print("</tr>");
 
-            out.print("<tr id=\"schedule-row\" style=\"display:none\">");
+            out.print("<tr id=\"schedule-row\" >");
             out.print("<td></td>");
             out.print("<td style=\"display:flex; justify-content:space-around\">");
             for (ShipSchedule schedule : schedules) {
@@ -83,6 +83,8 @@
 
                     out.print(EDIT); out.print(DELETE);
                     out.print("</div>");
+//                    String newSchedule =   "<form style=\"display: inline\" action=\"/page/schedules/details/new/" + ship.getSd_id() + "\"><input type=\"submit\" value=\"New\" /></form>";
+//                    out.print("<td>"); out.print(newSchedule); out.print("</td>");
 
             }
 
