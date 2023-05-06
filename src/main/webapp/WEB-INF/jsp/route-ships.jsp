@@ -76,12 +76,14 @@
 
                     String EDIT = "<form style=\"display: inline\" action=\"/page/schedules/details/update/"+schedule.getSch_id()+"\"><input type=\"submit\" value=\"Edit\" /></form>";
                     String DELETE = "<input type=\"submit\" value=\"Delete\" onclick=\"onDeleteSchedule(" + schedule.getSch_id() + ")\"/>";
+//                    String OPEN = "<input type=\"submit\" value=\"OPEN\" action=\"/page/schedules/details/" + schedule.getSch_id() +"\" \"/>";
+                    String OPEN = "<form style=\"display: inline\" action=\"/page/schedules/details/"+schedule.getSch_id()+"\"><input type=\"submit\" value=\"Open\" /></form>";
                     out.print("<div>");
                     out.print("<strong>Schedule ID :</strong>" + schedule.getSch_id()); out.print("<br>");
                     out.print("<strong>DateTime : </strong>" + schedule.getJourneyDate()); out.print("<br>");
                     out.print("<strong>Seats :</strong> " + schedule.getSeatAvailability() + "/" + ship.getCapacity()); out.print("<br>");
 
-                    out.print(EDIT); out.print(DELETE);
+                    out.print(EDIT); out.print(OPEN); out.print(DELETE);
                     out.print("</div>");
 //                    String newSchedule =   "<form style=\"display: inline\" action=\"/page/schedules/details/new/" + ship.getSd_id() + "\"><input type=\"submit\" value=\"New\" /></form>";
 //                    out.print("<td>"); out.print(newSchedule); out.print("</td>");
@@ -108,6 +110,12 @@
 
         </tbody>
     </table>
+
+
+<%--    TODO : add new ship details page here and assign it to the route--%>
+
+
+        <a href="/page/ships/details/new?assign=true&route_id=${route.getRoute_id()}">New Ship</a>
 
 
 

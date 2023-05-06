@@ -63,8 +63,8 @@ public class RouteDetailsController {
                                                       @RequestParam Optional<LocalDateTime> datetime,
                                                       @RequestParam Optional<String> destination){
 
-//        LocalDateTime dateTime = LocalDateTime.parse(data.get("datetime").toString(), DateTimeFormatter.ISO_LOCAL_DATE_TIME);
-        List<Object> returnData =
+        System.out.println("request : " + source.get() + " " + datetime.get() + " " + destination.get());
+        List<List<String>> returnData =
                 routeDetailsService.getRoutesForSrcAndDist(source.orElse(""), destination.orElse(""), datetime.orElse(LocalDateTime.now()));
 
 //        System.out.println("inside getRouteDetails : " + (data.get("datetime").toString()) + " " + data.get("destination") + " " + data.get("source"));

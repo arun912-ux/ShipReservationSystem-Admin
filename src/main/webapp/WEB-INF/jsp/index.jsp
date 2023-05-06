@@ -21,34 +21,52 @@
 <%--            out.print("index.jsp : Hello from servlet section");--%>
 <%--        %>--%>
 
-<h1 style="text-align: center">Select Location and Time</h1>
+<%--<h1 style="text-align: center">Select Location and Time</h1>--%>
 
-        <%--@elvariable id="indexRo" type="com.example.shipreservationsystem.ro.IndexRO"--%>
-        <form:form method="post" style="margin: 100px" action="/page/routes/details/request" modelAttribute="indexRo" cssClass="form">
-        <div class="form-group row">
-            <form:label path="source" class="bolder" >Source : </form:label>
-            <form:input id="source" path="source" type="text" />
-        </div> <br>
+<%--        &lt;%&ndash;@elvariable id="indexRo" type="com.example.shipreservationsystem.ro.IndexRO"&ndash;%&gt;--%>
+<%--        <form:form method="post" style="margin: 100px" action="/page/routes/details/request" modelAttribute="indexRo" cssClass="form">--%>
+<%--        <div class="form-group row">--%>
+<%--            <form:label path="source" class="bolder" >Source : </form:label>--%>
+<%--            <form:input id="source" path="source" type="text" />--%>
+<%--        </div> <br>--%>
 
-        <div class="form-group row">
-            <form:label path="destination" class="bolder" >Destination : </form:label>
-            <form:input id="destination" path="destination" type="text"/>
-        </div> <br>
+<%--        <div class="form-group row">--%>
+<%--            <form:label path="destination" class="bolder" >Destination : </form:label>--%>
+<%--            <form:input id="destination" path="destination" type="text"/>--%>
+<%--        </div> <br>--%>
 
-        <div class="form-group row">
-            <form:label path="datetime" class="bolder" >Date & Time: </form:label>
-            <form:input id="datetime" path="datetime" type="datetime-local"/>
-        </div> <br>
+<%--        <div class="form-group row">--%>
+<%--            <form:label path="datetime" class="bolder" >Date & Time: </form:label>--%>
+<%--            <form:input id="datetime" path="datetime" type="datetime-local"/>--%>
+<%--        </div> <br>--%>
 
-            <input type="submit" value="Submit">
+<%--            <input type="submit" value="Submit">--%>
 
-        </form:form>
+<%--        </form:form>--%>
+
+
+
+    <div class="all-classes-container center bolder">
+        <br>
+        <br>
+        <a href="/page/routes/" >Search</a> <br>
+        <a href="/page/routes/details/" >Routes</a> <br>
+        <a href="/page/ships/details" >Ships</a> <br>
+
+    </div>
+
 
 </body>
 
 <style>
     .bolder{
         font-weight: bolder;
+    }
+    .center{
+        align-content: center;
+        align-items: center;
+        text-align: center;
+        font-size: xx-large;
     }
 </style>
 

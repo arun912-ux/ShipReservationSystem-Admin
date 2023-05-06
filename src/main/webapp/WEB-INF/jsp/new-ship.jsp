@@ -2,6 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,9 +17,19 @@
 
 <body>
 
+    <%
+        Long routeId = (Long) request.getAttribute("route_id");
+        String assign = (String) request.getAttribute("assign");
+        String action = "/page/ships/details/new";
+        if(assign == null){
+            action = "/page/ships/details/new?route_id=" + routeId;
+        }
+
+    %>
+
 
 <%--@elvariable id="ship" type="com.example.shipreservationsystem.model.ShipDetails"--%>
-<form:form class="form-group" cssStyle="margin: 100px" value="POST" action="/page/ships/details/new" modelAttribute="ship" >
+<form:form id="form" class="form-group" cssStyle="margin: 100px" value="POST" action="" modelAttribute="ship" >
 
     <%--    <div class="form-group row">--%>
     <%--        <form:label path="route_id" class="bolder" >Route ID : </form:label>--%>
@@ -50,5 +61,10 @@
         font-weight: bolder;
     }
 </style>
+
+<script>
+    let myform = document.getElementById("form");
+    myform.action=${action}
+</script>
 
 </body>

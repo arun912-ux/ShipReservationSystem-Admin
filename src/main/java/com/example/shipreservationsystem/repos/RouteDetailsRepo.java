@@ -13,6 +13,7 @@ import java.util.List;
 public interface RouteDetailsRepo extends JpaRepository<RouteDetails, Long> {
 
 
+    // TODO : set the return object to specified object
     @Query(value = "select rd.source, rd.destination, sd.sname, sd.model, sss.journey_date from `route-details` rd " +
             " join routes_ships rs on rd.route_id = rs.route_id  " +
             "join `ship-details` sd on sd.sd_id = rs.ship_id  " +
@@ -20,6 +21,6 @@ public interface RouteDetailsRepo extends JpaRepository<RouteDetails, Long> {
             "join `ship-schedule` sss on ss.schedule_id = sss.sch_id  " +
             "where rd.destination = :destination and rd.source = :source and :dateTime <= sss.journey_date ",
             nativeQuery = true)
-    List<Object> findAllBySourceAndDestinationAndTime(String source, String destination, LocalDateTime dateTime);
+    List<List<String>> findAllBySourceAndDestinationAndTime(String source, String destination, LocalDateTime dateTime);
 
 }

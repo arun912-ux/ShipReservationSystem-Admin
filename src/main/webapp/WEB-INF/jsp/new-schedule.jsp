@@ -33,12 +33,12 @@
 <%--    </div> <br>--%>
 
     <div class="form-group row">
-        <form:label path="journeyDate" class="bolder" >Source : </form:label>
+        <form:label path="journeyDate" class="bolder" >Date & Time : </form:label>
         <form:input class="form-control" id="journeyDate" path="journeyDate" type="datetime-local" />
     </div> <br>
 
     <div class="form-group row">
-        <form:label path="seatAvailability" class="bolder" >Destination : </form:label>
+        <form:label path="seatAvailability" class="bolder" >Seats : </form:label>
         <form:input class="form-control" id="seatAvailability" path="seatAvailability" type="text"/>
     </div> <br>
 

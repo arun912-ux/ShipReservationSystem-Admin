@@ -72,15 +72,16 @@ public class RouteDetailsService {
         Set<RouteDetails> routes = shipDetails.getRoutes();
         boolean flag = true;
 //        System.out.println("all routes for given ship id : " + routes);
-        if (! routes.isEmpty()){
-//            routes.forEach(System.out::println);
-            for (RouteDetails rd : routes){
-                if (rd.getRoute_id() != rId) {
-                    flag = false;
-                    break;
+        if( routes != null)
+            if (! routes.isEmpty()){
+    //            routes.forEach(System.out::println);
+                for (RouteDetails rd : routes){
+                    if (rd.getRoute_id() != rId) {
+                        flag = false;
+                        break;
+                    }
                 }
             }
-        }
 
 
 //        System.out.println("\n flag : " + flag);
@@ -123,8 +124,8 @@ public class RouteDetailsService {
         return routeDetails;
     }
 
-    public List<Object> getRoutesForSrcAndDist(String source, String destination, LocalDateTime datetime) {
-        List<Object> all = routesRepo.findAllBySourceAndDestinationAndTime(source, destination, datetime);
+    public List<List<String>> getRoutesForSrcAndDist(String source, String destination, LocalDateTime datetime) {
+        List<List<String>> all = routesRepo.findAllBySourceAndDestinationAndTime(source, destination, datetime);
         return all;
     }
 }

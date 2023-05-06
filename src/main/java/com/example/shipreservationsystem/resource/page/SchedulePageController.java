@@ -5,6 +5,7 @@ import com.example.shipreservationsystem.model.ShipSchedule;
 import com.example.shipreservationsystem.repos.SchedulesRepo;
 import com.example.shipreservationsystem.resource.ShipController;
 import com.example.shipreservationsystem.service.ScheduleService;
+import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,17 @@ public class SchedulePageController {
     private final ScheduleService scheduleService;
     private final SchedulesRepo schedulesRepo;
     private final ShipController shipController;
+
+
+
+    // specific schedule id details. this shows passengers lislt
+    @GetMapping("/details/{id}")
+    public String viewSpecificSchedulePage(@PathVariable Long id, Model model){
+        model.addAttribute("schedule", scheduleService.getScheduleById(id));
+        return "schedule-details";
+    }
+
+
 
 
 

@@ -36,7 +36,7 @@ public class RouteDetailsPageController {
     @GetMapping({"/", ""})
     public String homePage(Model model, @ModelAttribute("indexRo") IndexRO indexRo, BindingResult bindingResult){
 //        System.out.println(indexRo);
-        return "index";
+        return "search-page";
     }
 
     // get all routes details from db
@@ -50,7 +50,7 @@ public class RouteDetailsPageController {
 
 
     @GetMapping("/details/{id}")
-    public String viewSpecificPage(@PathParam("id") Long id, Model model, BindingResult bindingResult){
+    public String viewSpecificPage(@PathVariable("id") Long id, Model model, BindingResult bindingResult){
         model.addAttribute("routeForId", routeDetailsService.getRouteDetailsById(id));
         return "routes";
     }
@@ -64,11 +64,12 @@ public class RouteDetailsPageController {
 
         System.out.println(indexRo);
 //        LocalDateTime dateTime = LocalDateTime.parse(data.get("datetime").toString(), DateTimeFormatter.ISO_LOCAL_DATE_TIME);
-        List<Object> routes =
+        List<List<String>> routes =
                 routeDetailsService.getRoutesForSrcAndDist(indexRo.getSource().orElse(""),
                                     indexRo.getDestination().orElse(""),
                                     indexRo.getDatetime().orElse(LocalDateTime.now()));
         model.addAttribute("routes", routes);
+        System.out.println("returned map : "+ routes);
         System.out.println("returned Data from custom query : " + routes);
         return "search-result";
 
