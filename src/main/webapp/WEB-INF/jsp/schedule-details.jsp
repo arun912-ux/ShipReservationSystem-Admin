@@ -11,7 +11,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Schedule</title>
+    <title>Schedule - Passengers</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"  crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"  crossorigin="anonymous"></script>
 </head>
@@ -26,14 +26,35 @@
         out.print("Passengers List");
     %>
 
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Passenger ID</th>
+                <th>Passenger Name</th>
+            </tr>
+        </thead>
+        <tbody>
+
 
     <%
         Set<PassengerProfile> passengers = schedule.getPassengers();
         for (PassengerProfile passenger : passengers) {
-            out.print(passenger.getPas_id() + "<br>");
-            out.print(passenger.getName() + "<br>");
+            out.print("<tr>");
+            out.print("<td>"); out.print(passenger.getPas_id()); out.print("</td>");
+            out.print("<td>"); out.print(passenger.getName()); out.print("</td>");
+            out.print("</tr>");
         }
 
     %>
+
+        </tbody>
+    </table>
+
+<style>
+    *{
+        font-size: medium;
+    }
+
+</style>
 
 </body>

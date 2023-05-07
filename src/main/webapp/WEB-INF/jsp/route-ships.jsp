@@ -112,7 +112,7 @@
     </table>
 
 
-<%--    TODO : add new ship details page here and assign it to the route--%>
+<%--    DONE : add new ship details page here and assign it to the route--%>
 
 
         <a href="/page/ships/details/new?assign=true&route_id=${route.getRoute_id()}">New Ship</a>
