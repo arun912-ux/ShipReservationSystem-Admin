@@ -1,4 +1,6 @@
 
+use projects;
+
 # route-details
 
 CREATE DEFINER=`root`@`%` TRIGGER `delete-routedetails-routes_ships` BEFORE DELETE ON `route-details` FOR EACH ROW BEGIN
