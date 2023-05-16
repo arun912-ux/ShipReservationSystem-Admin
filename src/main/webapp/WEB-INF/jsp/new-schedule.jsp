@@ -37,9 +37,9 @@
         <form:input class="form-control" id="journeyDate" path="journeyDate" type="datetime-local" />
     </div> <br>
 
-    <div class="form-group row">
+    <div class="form-group row" hidden="hidden">
         <form:label path="seatAvailability" class="bolder" >Seats : </form:label>
-        <form:input class="form-control" id="seatAvailability" path="seatAvailability" type="text"/>
+        <form:input class="form-control" id="seatAvailability" path="seatAvailability" type="text" value="0"/>
     </div> <br>
 
     <%--    <div class="form-group row">--%>

@@ -21,9 +21,9 @@
 
     <%
         ShipSchedule schedule = (ShipSchedule) request.getAttribute("schedule");
-        out.print("<h1>" + schedule.getSch_id() + "<br>");
-        out.print("<h1>" + schedule.getJourneyDate() + "<h1><br>");
-        out.print("Passengers List");
+        out.print("<br><h3> Schedule Id : " + schedule.getSch_id() + "</h3><br>");
+        out.print("<h3> Schedule Date : " + schedule.getJourneyDate() + "</h3><br>");
+        out.print("<h3>Passengers List</h3>");
     %>
 
     <table class="table table-bordered">

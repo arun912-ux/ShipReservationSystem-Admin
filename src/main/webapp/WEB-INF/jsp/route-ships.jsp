@@ -20,6 +20,12 @@
 
 <body>
 
+        <div class="home">
+
+            <a href="/" class="bolder">Home</a>
+        </div>
+
+
     <%
         RouteDetails route = (RouteDetails)request.getAttribute("route");
 
@@ -81,9 +87,10 @@
                     out.print("<div>");
                     out.print("<strong>Schedule ID :</strong>" + schedule.getSch_id()); out.print("<br>");
                     out.print("<strong>DateTime : </strong>" + schedule.getJourneyDate()); out.print("<br>");
-                    out.print("<strong>Seats :</strong> " + schedule.getSeatAvailability() + "/" + ship.getCapacity()); out.print("<br>");
+                    out.print("<strong>Seats :</strong> " + schedule.getPassengers().size() + "/" + ship.getCapacity()); out.print("<br>");
 
-                    out.print(EDIT); out.print(OPEN); out.print(DELETE);
+//                    out.print(EDIT);
+                    out.print(OPEN); out.print(DELETE);
                     out.print("</div>");
 //                    String newSchedule =   "<form style=\"display: inline\" action=\"/page/schedules/details/new/" + ship.getSd_id() + "\"><input type=\"submit\" value=\"New\" /></form>";
 //                    out.print("<td>"); out.print(newSchedule); out.print("</td>");
@@ -168,4 +175,21 @@
 
 
     </script>
+
+
+    <style>
+        .home {
+            margin: 20px;
+            align-content: end;
+            align-items: end;
+            text-align: right;
+        }
+
+        a{
+            text-decoration-line: none;
+        }
+    </style>
+
+
+
 </body>

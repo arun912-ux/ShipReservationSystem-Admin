@@ -23,6 +23,13 @@
 
 <body>
 
+        <div class="home">
+
+            <a href="/" class="bolder">Home</a>
+        </div>
+
+
+
     <%
         List<List<String>> routes = (List<List<String>>) request.getAttribute("routes");
 
@@ -68,6 +75,20 @@
 
 
     </table>
+
+    <style>
+        .home {
+            margin: 20px;
+            align-content: end;
+            align-items: end;
+            text-align: right;
+        }
+
+        a{
+            text-decoration-line: none;
+        }
+    </style>
+
 
 </body>
 

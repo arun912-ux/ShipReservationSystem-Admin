@@ -15,6 +15,11 @@
 
 
 <body>
+        <div class="home">
+
+            <a href="/" class="bolder">Home</a>
+        </div>
+
 
 <%--        <H1>Hello World</H1>--%>
 <%--        <%--%>
@@ -49,6 +54,16 @@
 <style>
     .bolder{
         font-weight: bolder;
+    }
+    .home {
+        margin: 20px;
+        align-content: end;
+        align-items: end;
+        text-align: right;
+    }
+
+    a{
+        text-decoration-line: none;
     }
 </style>
 

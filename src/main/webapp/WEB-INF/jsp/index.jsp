@@ -16,6 +16,11 @@
 
 <body>
 
+    <div class="logout">
+
+    <a href="/logout" class="bolder">Logout</a>
+    </div>
+
 <%--        <H1>Hello World</H1>--%>
 <%--        <%--%>
 <%--            out.print("index.jsp : Hello from servlet section");--%>
@@ -68,6 +73,17 @@
         text-align: center;
         font-size: xx-large;
     }
+    .logout {
+        margin: 20px;
+        align-content: end;
+        align-items: end;
+        text-align: right;
+    }
+
+    a{
+        text-decoration-line: none;
+    }
+
 </style>
 
 
