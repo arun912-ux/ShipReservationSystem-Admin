@@ -114,6 +114,13 @@ public class ShipControllerPageController {
 
 
 
+    // delete a route details by id
+    @RequestMapping(value = "/details/delete/{id}", method = {RequestMethod.POST, RequestMethod.DELETE, RequestMethod.GET})
+    public String deleteShipDetails(@PathVariable Long id){
+        ShipDetails deletedShipDetails = shipDetailsService.deleteShipDetails(id);
+        return "redirect:/page/ships/details";
+    }
+
 
 
 

@@ -135,10 +135,10 @@ public class RouteDetailsPageController {
 
 
     // delete a route details by id
-    @DeleteMapping("/details/delete/{id}")
+    @RequestMapping(value = "/details/delete/{id}", method = {RequestMethod.POST, RequestMethod.DELETE, RequestMethod.GET})
     public String deleteRouteDetails(@PathVariable Long id){
         RouteDetails deletedRouteDetails = routeDetailsService.deleteRouteDetails(id);
-        return "route-tables";
+        return "redirect:/page/routes/details";
     }
 
 

@@ -64,13 +64,14 @@
 
             String edit =   "<form style=\"display: inline\" action=\"/page/ships/details/update/"+route.getSd_id()+"\"><input type=\"submit\" value=\"Edit\" /></form>";
             String delete = "<input type=\"submit\" value=\"Delete\" onclick=\"onDelete(" + route.getSd_id() + ")\"/>";
+            String delete1 = "<form style=\"display: inline\" action=\"/page/ships/details/delete/"+route.getSd_id()+"\"><input type=\"submit\" value=\"DELETE\" /></form>";
             String select = "<form style=\"display: inline\" action=\"/page/ships/details/"+ route.getSd_id() + "\"><input type=\"submit\" value=\"Open\" /></form>";
             out.print("<tr>");
             out.print("<td>"); out.print(route.getSd_id()); out.print("</td>");
             out.print("<td>"); out.print(route.getSname()); out.print("</td>");
             out.print("<td>"); out.print(route.getModel()); out.print("</td>");
             out.print("<td>"); out.print(route.getCapacity()); out.print("</td>");
-            out.print("<td>"); out.print(edit); out.print("  "); out.println(); out.print("  "); out.print(delete); out.print("</td>");
+            out.print("<td>"); out.print(edit); out.print("  "); out.println(); out.print("  "); out.print(delete1); out.print("</td>");
             out.print("</tr>");
         }
 
@@ -97,7 +98,7 @@
             .catch((error) => console.log(error));
 
         setTimeout(function() {
-            location.reload();
+            // location.reload();
         }, 100);
     }
 

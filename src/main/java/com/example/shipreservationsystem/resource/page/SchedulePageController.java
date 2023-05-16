@@ -3,10 +3,12 @@ package com.example.shipreservationsystem.resource.page;
 import com.example.shipreservationsystem.model.ShipDetails;
 import com.example.shipreservationsystem.model.ShipSchedule;
 import com.example.shipreservationsystem.repos.SchedulesRepo;
+import com.example.shipreservationsystem.resource.RouteDetailsController;
 import com.example.shipreservationsystem.resource.ShipController;
 import com.example.shipreservationsystem.service.ScheduleService;
 import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -56,6 +58,16 @@ public class SchedulePageController {
         return "edit-schedule";
     }
 
+
+
+
+
+    // delete a route details by id
+    @RequestMapping(value = "/details/delete/{sch_id}", method = {RequestMethod.POST, RequestMethod.DELETE, RequestMethod.GET})
+    public String deleteShipDetails(@PathVariable Long sch_id){
+        scheduleService.deleteSchedule(sch_id);
+        return "redirect:/page/routes/details";
+    }
 
 
 

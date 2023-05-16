@@ -114,7 +114,7 @@ public class RouteDetailsController {
 
 
     // delete a route details by id
-    @DeleteMapping("/details/delete/{id}")
+    @RequestMapping(value = "/details/delete/{id}", method ={RequestMethod.DELETE, RequestMethod.POST})
     public ResponseEntity<ResponseRO> deleteRouteDetails(@PathVariable Long id){
         RouteDetails deletedRouteDetails = routeDetailsService.deleteRouteDetails(id);
         return ResponseEntity.ok(ResponseRO.builder()

@@ -50,7 +50,7 @@
         </thead>
         <tbody>
 
-
+    <a href="/page/ships/"
 
     <%
 
@@ -61,6 +61,8 @@
             String edit =   "<form style=\"display: inline\" action=\"/page/ships/details/update/"+route.getRoute_id()+"\"><input type=\"submit\" value=\"Edit\" /></form>";
             // remove route-ship association
             String delete = "<input type=\"submit\" value=\"Delete\" onclick=\"onDeleteShip(" + route.getRoute_id() + ',' + ship.getSd_id() + ")\"/>";
+            String delete1 = "<form style=\"display: inline\" action=\"/page/ships/details/delete/"+ship.getSd_id()+"\"><input type=\"submit\" value=\"DELETE\" /></form>";
+//            String delete2 = "<form style=\"display: inline\" action=\"/page/schedules/details/delete/"+ship.getSd_id()+"\"><input type=\"submit\" value=\"DELETE\" /></form>";
             String open = "<input type=\"submit\" value=\"Open\" onclick=\"changeScheduleDisplay()\">";
 //            out.print("<tr>");
 //            out.print("<td>"); out.print(ship.getSd_id()); out.print("</td>");
@@ -84,6 +86,7 @@
 
                     String EDIT = "<form style=\"display: inline\" action=\"/page/schedules/details/update/"+schedule.getSch_id()+"\"><input type=\"submit\" value=\"Edit\" /></form>";
                     String DELETE = "<input type=\"submit\" value=\"Delete\" onclick=\"onDeleteSchedule(" + schedule.getSch_id() + ")\"/>";
+                    String DELETE1 = "<form style=\"display: inline\" action=\"/page/schedules/details/delete/"+schedule.getSch_id()+"\"><input type=\"submit\" value=\"DELETE\" /></form>";
 //                    String OPEN = "<input type=\"submit\" value=\"OPEN\" action=\"/page/schedules/details/" + schedule.getSch_id() +"\" \"/>";
                     String OPEN = "<form style=\"display: inline\" action=\"/page/schedules/details/"+schedule.getSch_id()+"\"><input type=\"submit\" value=\"Open\" /></form>";
                     out.print("<div>");
@@ -92,7 +95,7 @@
                     out.print("<strong>Seats :</strong> " + schedule.getPassengers().size() + "/" + ship.getCapacity()); out.print("<br>");
 
                     out.print(EDIT);
-                    out.print(OPEN); out.print(DELETE);
+                    out.print(OPEN); out.print(DELETE1);
                     out.print("</div>");
 //                    String newSchedule =   "<form style=\"display: inline\" action=\"/page/schedules/details/new/" + ship.getSd_id() + "\"><input type=\"submit\" value=\"New\" /></form>";
 //                    out.print("<td>"); out.print(newSchedule); out.print("</td>");
@@ -157,7 +160,7 @@
                 .catch((error) => console.log(error));
 
             setTimeout(function() {
-                location.reload();
+                // location.reload();
             }, 100);
         }
 

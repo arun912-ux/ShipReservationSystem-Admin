@@ -88,7 +88,7 @@ public class ScheduleController {
 
 
     // delete a schedule details by id
-    @DeleteMapping("/details/delete/{id}")
+    @RequestMapping(value = "/details/delete/{id}", method = {RequestMethod.DELETE, RequestMethod.GET, RequestMethod.POST})
     public ResponseEntity<ResponseRO> deleteScheduleDetails(@PathVariable Long id){
         ShipSchedule deletedSchedule = scheduleService.deleteSchedule(id);
         return ResponseEntity.ok(ResponseRO.builder()
