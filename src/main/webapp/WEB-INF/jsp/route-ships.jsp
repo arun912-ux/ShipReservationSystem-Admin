@@ -72,7 +72,9 @@
                 out.print("<td>"); out.print(ship.getSd_id()); out.print("</td>");
                 out.print("<td>"); out.print(ship.getSname()); out.print("</td>");
                 out.print("<td>"); out.print(ship.getModel()); out.print("</td>");
-                out.print("<td>"); out.print("edit"); out.print("  "); out.print(open); out.print("  "); out.print(delete); out.print("</td>");
+                out.print("<td>");
+//                out.print("edit");
+                out.print("  "); out.print(open); out.print("  "); out.print(delete); out.print("</td>");
             out.print("</tr>");
 
             out.print("<tr id=\"schedule-row\" >");
@@ -89,7 +91,7 @@
                     out.print("<strong>DateTime : </strong>" + schedule.getJourneyDate()); out.print("<br>");
                     out.print("<strong>Seats :</strong> " + schedule.getPassengers().size() + "/" + ship.getCapacity()); out.print("<br>");
 
-//                    out.print(EDIT);
+                    out.print(EDIT);
                     out.print(OPEN); out.print(DELETE);
                     out.print("</div>");
 //                    String newSchedule =   "<form style=\"display: inline\" action=\"/page/schedules/details/new/" + ship.getSd_id() + "\"><input type=\"submit\" value=\"New\" /></form>";
