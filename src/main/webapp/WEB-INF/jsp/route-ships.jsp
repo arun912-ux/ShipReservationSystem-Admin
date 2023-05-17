@@ -76,7 +76,7 @@
                 out.print("<td>"); out.print(ship.getModel()); out.print("</td>");
                 out.print("<td>");
 //                out.print("edit");
-                out.print("  "); out.print(open); out.print("  "); out.print(delete); out.print("</td>");
+                out.print("  "); out.print(open); out.print("  "); out.print(delete1); out.print("</td>");
             out.print("</tr>");
 
             out.print("<tr id=\"schedule-row\" >");
