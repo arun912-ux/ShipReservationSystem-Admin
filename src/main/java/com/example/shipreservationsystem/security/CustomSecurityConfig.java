@@ -59,7 +59,7 @@ public class CustomSecurityConfig {
     public UserDetailsService userDetailsService() {
         UserDetails admin = User.builder()
                 .username("admin")
-                .password(passwordEncoder().encode("password"))
+                .password(passwordEncoder().encode("pass"))
                 .roles("USER", "ADMIN")
                 .build();
         return new InMemoryUserDetailsManager(admin);
