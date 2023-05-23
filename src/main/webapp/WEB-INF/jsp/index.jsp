@@ -18,7 +18,8 @@
 
     <div class="logout">
 
-    <a href="/logout" class="bolder">Logout</a>
+    <a href="/logout" class="bolder">Logout</a><br>
+    <a href="/page/admin/" class="bolder">Change Password</a>
     </div>
 
 <%--        <H1>Hello World</H1>--%>

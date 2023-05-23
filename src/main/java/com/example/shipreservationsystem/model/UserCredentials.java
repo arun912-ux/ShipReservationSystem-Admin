@@ -17,11 +17,11 @@ public class UserCredentials {
     @Id
     @GeneratedValue
     private Long id;
-    private String userName;
-    private String passWord;
+    private String username;
+    private String password;
 
-    public UserCredentials(String userName, String passWord) {
-        this.userName = userName;
-        this.passWord = passWord;
+    public UserCredentials(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 }
